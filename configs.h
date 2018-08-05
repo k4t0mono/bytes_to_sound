@@ -7,14 +7,13 @@
 #define BIT_TIME 5
 #define MAX_VOLUME 0x5050
 
-#define LOW_FREQUENCY BIT_TIME * 500
 #define LOW_LENGTH 2
 #define MEDIUM_LEGNTH 4
 #define HIGH_LENGTH 8
-//const int SAMPLES_PER_BIT = SAMPLES_PER_MS * BIT_TIME;
 #define SAMPLES_PER_BIT SAMPLE_RATE / 1000 * BIT_TIME
 
 enum SignalType {
+	Invalid,
 	NewData,
 	EndData,
 	Bit0,
@@ -50,5 +49,7 @@ struct WavFile {
 	char data_header[4];
 	uint32_t data_samples;
 };
+
+void inspect_signals(enum SignalType* signals, int size);
 
 #endif

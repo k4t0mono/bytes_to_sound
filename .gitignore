@@ -1,4 +1,6 @@
 *.wav
+*.hex
+*.txt
 # Created by https://www.gitignore.io/api/c
 
 ### C ###

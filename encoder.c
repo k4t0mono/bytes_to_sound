@@ -6,27 +6,6 @@
 #include <stdbool.h>
 #include "configs.h"
 
-void inspect_signals(enum SignalType* signals, int size) {
-	for(int i = 0; i < size; ++i) {
-		switch(signals[i]) {
-			case NewData:
-				printf("N "); break;
-
-			case EndData:
-				printf("E "); break;
-
-			case Bit0:
-				printf("0 "); break;
-
-			case Bit1:
-				printf("1 "); break;
-
-			default:
-				printf("x "); break;
-		}
-	}
-	printf("\n");
-}
 
 enum SignalType* byte_to_signal(char c) {
 	enum SignalType* signals = (enum SignalType*) malloc(9 * sizeof(enum SignalType));

@@ -1,16 +1,17 @@
 # I'm just a Makefile
 
 CC=clang
-FLAGS=-Wall -Wextra -O0
+OL=0
+FLAGS=-Wall -Wextra -O$(OL)
+DEPS=configs.h encoder.h decoder.h
+OBJS=main.o encoder.o decoder.o configs.o
 
-bts: main.o encoder.o
-	$(CC) $(FLAGS) -g encoder.o main.o -o bts.out
+%.o: %.c $(DEPS)
+	$(CC) $(FLAGS) -c $< -o $@
 
-main.o: main.c
-	$(CC) $(FLAGS) -c main.c -o main.o
+bts.out: $(OBJS)
+	$(CC) $(FLAGS) -g $^ -o $@
 
-encoder.o: configs.h encoder.c
-	$(CC) $(FLAGS) -c encoder.c -o encoder.o
 
 clean:
 	$(RM) *.o bts.out
