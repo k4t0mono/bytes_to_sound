@@ -9,6 +9,7 @@ int main(int argc, char** argv) {
 	if(argc != 4) {
 		printf("bts encode <string> <file-output>\n");
 		printf("bts decode <file-input> <file-output>\n");
+		return 1;
 	}
 
 	if(!strcmp(argv[1], "encode")) {
@@ -22,5 +23,5 @@ int main(int argc, char** argv) {
 		printf("bts decode <file-input> <file-output>\n");
 	}
 
-	return(0);
+	return 0;
 }

@@ -1,17 +1,28 @@
 # I'm just a Makefile
 
-CC=clang
-OL=0
-FLAGS=-Wall -Wextra -O$(OL)
-DEPS=configs.h encoder.h decoder.h
-OBJS=main.o encoder.o decoder.o configs.o
+EXE = bts
+CC = clang
 
-%.o: %.c $(DEPS)
-	$(CC) $(FLAGS) -c $< -o $@
+SRC_DIR = src
+OBJ_DIR = obj
 
-bts.out: $(OBJS)
-	$(CC) $(FLAGS) -g $^ -o $@
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
+CPPFLAGS += -I include
+CXXFLAGS += -Wall -std=c11
+LDFLAGS += -L lib
+LDLIBS +=
+
+.PHONY: all clean
+
+all: $(EXE).out
+
+$(EXE).out: $(OBJ)
+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	$(RM) *.o bts.out
+	$(RM) $(OBJ) $(EXE).out
